@@ -1,0 +1,34 @@
+
+
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  postgres:
+    image: pgvector/pgvector:pg16   # plain Postgres + pgvector extension baked in
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=krisha
+      - POSTGRES_DB=ragdb
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: rag-app
+    ports:
+      - "8501:8501"
+    depends_on:
+      - ollama
+      - postgres
+
+volumes:
+  ollama_data:
+  pg_data:

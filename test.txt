@@ -1,0 +1,36 @@
+If you want a tiny website that contains general factual knowledge to see if your local RAG system can read text and pull the right answer, these are excellent simple targets:
+## 1. https://simple.wikipedia.org/wiki/President_of_the_United_States
+
+* 
+* What it is: The "Simple English" Wikipedia page about the U.S. presidency. It contains very basic, clean paragraphs. [1] 
+* Great for RAG because: It contains general political facts without complex layout jargon.
+* Test Queries:
+* "What is the annual salary of the President?" (Expected RAG Answer: $400,000)
+   * "Who was the very first holder of the office?" (Expected RAG Answer: George Washington) [1] 
+* 
+
+## 2. https://wikipedia.org
+
+* 
+* What it is: A basic, ultra-clean text page about planet Earth.
+* Great for RAG because: It provides a mix of numbers, scientific facts, and descriptive text sentences. It's the ultimate sandbox to test if your model can fetch accurate metrics.
+* Test Queries:
+* "How long does it take for Earth to orbit the Sun?"
+   * "What is the layer underneath the Earth's crust called?"
+* 
+
+## 3. https://httpbin.org
+
+* 
+* What it is: A raw text file (not even an HTML page).
+* Great for RAG because: Sometimes you want to check how your RAG pipeline strips data when there are no HTML tags at all.
+* Test Queries: "What paths are disallowed for the badbot user agent?"
+* 
+
+------------------------------
+## 💡 General Knowledge RAG Verification Trick
+When testing "any information," you should always use The Hallucination Check. After you scrape one of these pages and put it into your database, ask Ollama a question that is not on the page (e.g., "What is the recipe for chocolate chip cookies?").
+If your RAG prompt is set up correctly, Ollama should strictly reply: "I cannot answer this based on the provided context." If it answers with a real recipe, you know your prompt constraints are too weak!
+Which of these fields are you leaning toward next? I can help you write a metadata tagger so your RAG knows the URL origin of each chunk.
+
+[1] [https://simple.wikipedia.org](https://simple.wikipedia.org/wiki/President_of_the_United_States)
